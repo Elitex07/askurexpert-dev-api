@@ -3,14 +3,16 @@ import { PrismaClient } from "@/generated/prisma";
 
 const prisma = new PrismaClient();
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const post = await prisma.customer.findUnique({
     where: { clerkId: params.id },
   });
   return NextResponse.json(post);
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const { name, email } = await req.json();
   const customer = await prisma.customer.update({
     where: { clerkId: params.id },
@@ -19,7 +21,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   return NextResponse.json(customer);
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   await prisma.customer.delete({
     where: { clerkId: params.id },
   });
