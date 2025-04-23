@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const post = await prisma.customer.findUnique({
-    where: { id: params.id },
+    where: { clerkId: params.id },
   });
   return NextResponse.json(post);
 }
