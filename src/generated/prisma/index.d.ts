@@ -880,6 +880,7 @@ export namespace Prisma {
   }
 
   export type CustomerMinAggregateOutputType = {
+    id: string | null
     name: string | null
     email: string | null
     createdAt: Date | null
@@ -889,6 +890,7 @@ export namespace Prisma {
   }
 
   export type CustomerMaxAggregateOutputType = {
+    id: string | null
     name: string | null
     email: string | null
     createdAt: Date | null
@@ -898,6 +900,7 @@ export namespace Prisma {
   }
 
   export type CustomerCountAggregateOutputType = {
+    id: number
     name: number
     email: number
     createdAt: number
@@ -909,6 +912,7 @@ export namespace Prisma {
 
 
   export type CustomerMinAggregateInputType = {
+    id?: true
     name?: true
     email?: true
     createdAt?: true
@@ -918,6 +922,7 @@ export namespace Prisma {
   }
 
   export type CustomerMaxAggregateInputType = {
+    id?: true
     name?: true
     email?: true
     createdAt?: true
@@ -927,6 +932,7 @@ export namespace Prisma {
   }
 
   export type CustomerCountAggregateInputType = {
+    id?: true
     name?: true
     email?: true
     createdAt?: true
@@ -1009,10 +1015,11 @@ export namespace Prisma {
   }
 
   export type CustomerGroupByOutputType = {
+    id: string
     name: string
     email: string
     createdAt: Date
-    clerkId: string
+    clerkId: string | null
     panNumber: string | null
     status: string
     _count: CustomerCountAggregateOutputType | null
@@ -1035,6 +1042,7 @@ export namespace Prisma {
 
 
   export type CustomerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     name?: boolean
     email?: boolean
     createdAt?: boolean
@@ -1044,6 +1052,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["customer"]>
 
   export type CustomerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     name?: boolean
     email?: boolean
     createdAt?: boolean
@@ -1053,6 +1062,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["customer"]>
 
   export type CustomerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     name?: boolean
     email?: boolean
     createdAt?: boolean
@@ -1062,6 +1072,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["customer"]>
 
   export type CustomerSelectScalar = {
+    id?: boolean
     name?: boolean
     email?: boolean
     createdAt?: boolean
@@ -1070,16 +1081,17 @@ export namespace Prisma {
     status?: boolean
   }
 
-  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"name" | "email" | "createdAt" | "clerkId" | "panNumber" | "status", ExtArgs["result"]["customer"]>
+  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "createdAt" | "clerkId" | "panNumber" | "status", ExtArgs["result"]["customer"]>
 
   export type $CustomerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Customer"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
+      id: string
       name: string
       email: string
       createdAt: Date
-      clerkId: string
+      clerkId: string | null
       panNumber: string | null
       status: string
     }, ExtArgs["result"]["customer"]>
@@ -1165,8 +1177,8 @@ export namespace Prisma {
      * // Get first 10 Customers
      * const customers = await prisma.customer.findMany({ take: 10 })
      * 
-     * // Only select the `name`
-     * const customerWithNameOnly = await prisma.customer.findMany({ select: { name: true } })
+     * // Only select the `id`
+     * const customerWithIdOnly = await prisma.customer.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends CustomerFindManyArgs>(args?: SelectSubset<T, CustomerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1210,9 +1222,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Customers and only return the `name`
-     * const customerWithNameOnly = await prisma.customer.createManyAndReturn({
-     *   select: { name: true },
+     * // Create many Customers and only return the `id`
+     * const customerWithIdOnly = await prisma.customer.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -1301,9 +1313,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Customers and only return the `name`
-     * const customerWithNameOnly = await prisma.customer.updateManyAndReturn({
-     *   select: { name: true },
+     * // Update zero or more Customers and only return the `id`
+     * const customerWithIdOnly = await prisma.customer.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1505,6 +1517,7 @@ export namespace Prisma {
    * Fields of the Customer model
    */
   interface CustomerFieldRefs {
+    readonly id: FieldRef<"Customer", 'String'>
     readonly name: FieldRef<"Customer", 'String'>
     readonly email: FieldRef<"Customer", 'String'>
     readonly createdAt: FieldRef<"Customer", 'DateTime'>
@@ -1892,6 +1905,7 @@ export namespace Prisma {
 
 
   export const CustomerScalarFieldEnum: {
+    id: 'id',
     name: 'name',
     email: 'email',
     createdAt: 'createdAt',
@@ -1981,24 +1995,27 @@ export namespace Prisma {
     AND?: CustomerWhereInput | CustomerWhereInput[]
     OR?: CustomerWhereInput[]
     NOT?: CustomerWhereInput | CustomerWhereInput[]
+    id?: StringFilter<"Customer"> | string
     name?: StringFilter<"Customer"> | string
     email?: StringFilter<"Customer"> | string
     createdAt?: DateTimeFilter<"Customer"> | Date | string
-    clerkId?: StringFilter<"Customer"> | string
+    clerkId?: StringNullableFilter<"Customer"> | string | null
     panNumber?: StringNullableFilter<"Customer"> | string | null
     status?: StringFilter<"Customer"> | string
   }
 
   export type CustomerOrderByWithRelationInput = {
+    id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
-    clerkId?: SortOrder
+    clerkId?: SortOrderInput | SortOrder
     panNumber?: SortOrderInput | SortOrder
     status?: SortOrder
   }
 
   export type CustomerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
     email?: string
     clerkId?: string
     panNumber?: string
@@ -2008,13 +2025,14 @@ export namespace Prisma {
     name?: StringFilter<"Customer"> | string
     createdAt?: DateTimeFilter<"Customer"> | Date | string
     status?: StringFilter<"Customer"> | string
-  }, "clerkId" | "email" | "clerkId" | "panNumber">
+  }, "id" | "id" | "email" | "clerkId" | "panNumber">
 
   export type CustomerOrderByWithAggregationInput = {
+    id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
-    clerkId?: SortOrder
+    clerkId?: SortOrderInput | SortOrder
     panNumber?: SortOrderInput | SortOrder
     status?: SortOrder
     _count?: CustomerCountOrderByAggregateInput
@@ -2026,73 +2044,81 @@ export namespace Prisma {
     AND?: CustomerScalarWhereWithAggregatesInput | CustomerScalarWhereWithAggregatesInput[]
     OR?: CustomerScalarWhereWithAggregatesInput[]
     NOT?: CustomerScalarWhereWithAggregatesInput | CustomerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Customer"> | string
     name?: StringWithAggregatesFilter<"Customer"> | string
     email?: StringWithAggregatesFilter<"Customer"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
-    clerkId?: StringWithAggregatesFilter<"Customer"> | string
+    clerkId?: StringNullableWithAggregatesFilter<"Customer"> | string | null
     panNumber?: StringNullableWithAggregatesFilter<"Customer"> | string | null
     status?: StringWithAggregatesFilter<"Customer"> | string
   }
 
   export type CustomerCreateInput = {
+    id?: string
     name: string
     email: string
     createdAt?: Date | string
-    clerkId: string
+    clerkId?: string | null
     panNumber?: string | null
     status?: string
   }
 
   export type CustomerUncheckedCreateInput = {
+    id?: string
     name: string
     email: string
     createdAt?: Date | string
-    clerkId: string
+    clerkId?: string | null
     panNumber?: string | null
     status?: string
   }
 
   export type CustomerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clerkId?: StringFieldUpdateOperationsInput | string
+    clerkId?: NullableStringFieldUpdateOperationsInput | string | null
     panNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clerkId?: StringFieldUpdateOperationsInput | string
+    clerkId?: NullableStringFieldUpdateOperationsInput | string | null
     panNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomerCreateManyInput = {
+    id?: string
     name: string
     email: string
     createdAt?: Date | string
-    clerkId: string
+    clerkId?: string | null
     panNumber?: string | null
     status?: string
   }
 
   export type CustomerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clerkId?: StringFieldUpdateOperationsInput | string
+    clerkId?: NullableStringFieldUpdateOperationsInput | string | null
     panNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clerkId?: StringFieldUpdateOperationsInput | string
+    clerkId?: NullableStringFieldUpdateOperationsInput | string | null
     panNumber?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
@@ -2144,6 +2170,7 @@ export namespace Prisma {
   }
 
   export type CustomerCountOrderByAggregateInput = {
+    id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
@@ -2153,6 +2180,7 @@ export namespace Prisma {
   }
 
   export type CustomerMaxOrderByAggregateInput = {
+    id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
@@ -2162,6 +2190,7 @@ export namespace Prisma {
   }
 
   export type CustomerMinOrderByAggregateInput = {
+    id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
