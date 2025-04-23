@@ -8,18 +8,12 @@ export async function GET() {
     return NextResponse.json(posts);
 }
 
-interface CustomerRequestBody {
-    name: string;
-    email: string;
-    clerkId: string;
-}
-
 export async function POST(req: Request) {
     const data = await req.json();
     console.log(data);
-    const { name, email, clerkId }: CustomerRequestBody = data;
+    const { name, email, clerkId, panNumber, status } = data;
     const post = await prisma.customer.create({
-        data: { name, email, clerkId},
+        data: { name, email, clerkId, panNumber, status},
     });
     return NextResponse.json(post);
 }

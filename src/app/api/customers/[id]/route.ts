@@ -13,10 +13,10 @@ export async function GET(req: Request, props: { params: Promise<{ id: string }>
 
 export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const { name, email } = await req.json();
+  const { name, email, panNumber, status, createdAt } = await req.json();
   const customer = await prisma.customer.update({
     where: { clerkId: params.id },
-    data: { name, email },
+    data: { name, email, panNumber, status, createdAt },
   });
   return NextResponse.json(customer);
 }

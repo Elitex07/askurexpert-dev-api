@@ -9,8 +9,10 @@ datasource db {
 }
 
 model Customer {
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
-  clerkId   String   @id @unique
+  name        String
+  email       String   @unique
+  createdAt   DateTime @default(now())
+  clerkId     String   @id @unique
+  panNumber   String?  @unique
+  status      String   @default("unverified")
 }
