@@ -17,12 +17,12 @@ export async function POST(req: Request) {
 
     const allowedOrigins = ['http://localhost:3000', 'https://main-website-three-tau.vercel.app'];
     const origin = req.headers.get('origin') || '';
-    
+
     return NextResponse.json(post, {
         status: 200,
         headers: {
             'Access-Control-Allow-Origin': allowedOrigins.includes(origin) ? origin : '',
-            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
         }
     });
